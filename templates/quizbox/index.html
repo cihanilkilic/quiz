@@ -1,0 +1,116 @@
+
+{% load static %}
+{% include 'base/layout.html' %}
+{% block body %}
+<style>
+  body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+  }
+  .container {
+      max-width: 1200px;
+      margin: auto;
+  }
+  .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+  }
+  .col {
+      flex: 1 1 calc(50% - 20px);
+      max-width: calc(50% - 20px);
+      box-sizing: border-box;
+  }
+  .card {
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      background-color: #fff;
+      overflow: hidden;
+  }
+  .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  .card-img-top {
+      width: 100%;
+      height: 200px; /* Sabit yükseklik */
+      object-fit: cover; /* Resimleri kırparak uyumlu hale getirir */
+      display: block;
+  }
+  .card-body {
+      text-align: center;
+      padding: 20px;
+  }
+  .card-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+      color: #333;
+  }
+  .card-text {
+      color: #6c757d;
+      font-size: 1rem;
+      margin: 0;
+  }
+  @media (max-width: 768px) {
+      .col {
+          flex: 1 1 calc(100% - 20px);
+          max-width: calc(100% - 20px);
+      }
+  }
+</style> 
+ <div class="container">
+  <div class="row">
+    {% for image_file in image_files %}
+      <div class="col">
+          <div class="card">
+              <img src="{{ MEDIA_URL }}{{ image_file }}" class="card-img-top" alt="Image 1">
+              <div class="card-body">
+                  <h5 class="card-title">
+                    {% if forloop.counter == 1 %}
+                    SINAV
+                {% elif forloop.counter == 2 %}
+                    DENEME
+                {% elif forloop.counter == 3 %}
+                    TYT (Temel Yeterlilik Testi)
+                {% elif forloop.counter == 4 %}
+                    AYT (Alan Yeterlilik Testi)
+                {% else %}
+                    {{ image_file|slice:"7:-5" }} <!-- Default title extracted from filename -->
+                {% endif %}
+
+                  </h5>
+                  <p class="card-text">
+                    {% if forloop.counter == 1 %}
+                    Sınav stresi ve kaygısı, öğrencilerin performansını etkileyebilir, bu yüzden sınav öncesi doğru hazırlık ve rahatlama teknikleri önemlidir. Kendine inan, başarını artır.
+                {% elif forloop.counter == 2 %}
+                    Deneme sınavları, sınav kaygısını azaltma ve zaman yönetimi becerilerini geliştirme açısından da faydalıdır. Kendine inan, zamanı iyi kullan.
+                {% elif forloop.counter == 3 %}
+                    TYT, Türkiye'de üniversiteye giriş sürecinde uygulanan ilk aşama sınavıdır ve genel yetenek ile temel bilgileri ölçmeyi amaçlar. Kendini dene, potansiyelini keşfet.
+                {% elif forloop.counter == 4 %}
+                    AYT sonuçları, öğrencilerin üniversitelerin ilgili bölümlerine yerleştirilmelerinde önemli bir rol oynar. Kendine inan, geleceğini şekillendir.
+                {% else %}
+                    Bu bir açıklama metnidir. Daha fazla bilgi için kendine inan ve başarını artır.
+                {% endif %}
+                  </p>
+              </div>
+          </div>
+      </div>
+
+      {% endfor %}
+
+  </div>
+</div>
+
+<div style="margin-top: 80px;"></div>
+  {% include 'base/albums.html' %}
+
+  {% comment %} <div style="margin-top: 250px;"></div> {% endcomment %}
+  {% include 'base/footer.html' %}
+
+{% endblock body %}
