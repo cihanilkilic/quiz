@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-3_yr6o2y%+^7z(lmolarvv9)gf7_e&vhy1s@t0z^x3n01me#ld
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['quizkutusu.pythonanywhere.com']
 
 
 # Application definition
